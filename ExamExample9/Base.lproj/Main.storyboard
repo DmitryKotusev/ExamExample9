@@ -29,11 +29,25 @@
                                     <action selector="changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="piR-RF-axZ"/>
                                 </connections>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="alQ-x2-yMf">
+                                <rect key="frame" x="16" y="79" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Без анимации"/>
+                                    <segment title="Вращение"/>
+                                    <segment title="Перемещение"/>
+                                    <segment title="Прозрачность"/>
+                                </segments>
+                                <connections>
+                                    <action selector="animationPressed:" destination="BYZ-38-t0r" eventType="valueChanged" id="dg6-hb-YJr"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="animationControl" destination="alQ-x2-yMf" id="xat-5h-hGX"/>
                         <outlet property="backgroungControl" destination="bIE-KG-M9B" id="r57-JK-2X8"/>
                     </connections>
                 </viewController>

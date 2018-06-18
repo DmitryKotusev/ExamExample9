@@ -11,8 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     var pentagon: CAShapeLayer!
     
+    @IBOutlet weak var animationControl: UISegmentedControl!
     @IBOutlet weak var backgroungControl: UISegmentedControl!
     @IBAction func changed(_ sender: Any) {
+        pentagon.removeAllAnimations()
         if(backgroungControl.selectedSegmentIndex == 0)
         {
             pentagon.fillColor = UIColor.blue.cgColor
@@ -20,6 +22,47 @@ class ViewController: UIViewController {
         else
         {
             pentagon.fillColor = UIColor(patternImage: UIImage(named: "Image")!).cgColor
+        }
+    }
+    @IBAction func animationPressed(_ sender: Any) {
+        switch animationControl.selectedSegmentIndex {
+        case 0:
+            pentagon.removeAllAnimations()
+        case 1: do {
+            //pentagon.removeAllAnimations()
+            pentagon.removeAllAnimations()
+            let animation = CAKeyframeAnimation(keyPath: "transform.rotation")
+            animation.values = [
+            0, Double.pi * 6
+            ]
+            animation.keyTimes = [0, 1]
+            animation.duration = 4
+            pentagon.add(animation, forKey: nil)
+            }
+        case 2:
+            //pentagon.removeAllAnimations()
+            let animation = CAKeyframeAnimation(keyPath: "position")
+            animation.values = [
+            [pentagon.position.x, pentagon.position.y],
+            [pentagon.position.x, pentagon.position.y + 60],
+            [pentagon.position.x, pentagon.position.y]
+            ]
+            animation.keyTimes = [0.0, 0.5, 1.0]
+            animation.duration = 6
+            pentagon.add(animation, forKey: nil)
+        case 3:
+            //pentagon.removeAllAnimations()
+            let animation = CAKeyframeAnimation(keyPath: "opacity")
+            animation.values = [
+            1.0, 0.0, 1.0
+            ]
+            animation.keyTimes = [0.0, 0.5, 1.0]
+            animation.duration = 6
+            pentagon.add(animation, forKey: nil)
+            break
+        default: do {
+            pentagon.removeAllAnimations()
+            }
         }
     }
     func getPentagonPath(center: CGPoint, radius: CGFloat) -> UIBezierPath {
@@ -38,8 +81,8 @@ class ViewController: UIViewController {
     
     func drawPentagon() {
         pentagon = CAShapeLayer()
-        pentagon.frame = CGRect(x: 160, y: 130, width: 200, height: 200)
-        pentagon.path = getPentagonPath(center: CGPoint(x: 50, y: 50), radius: 100).cgPath
+        pentagon.frame = CGRect(x: 110, y: 150, width: 200, height: 200)
+        pentagon.path = getPentagonPath(center: CGPoint(x: 100, y: 100), radius: 100).cgPath
         pentagon.fillColor = UIColor.blue.cgColor
         
         self.view.layer.addSublayer(pentagon)
